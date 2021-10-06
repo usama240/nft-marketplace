@@ -1,13 +1,7 @@
 import { ethers } from "ethers";
 import { useEffect, useState } from "react";
-import axios from "axios";
 import Web3Modal from "web3modal";
-
-import { nftmarketaddress, nftaddress } from "../config";
-
-import Market from "../artifacts/contracts/NFTMarket.sol/NFTMarket.json";
-import NFT from "../artifacts/contracts/NFT.sol/NFT.json";
-
+import { getCreatedItems, buy } from "../utils/utils";
 import OwnedCard from "./cards/OwnedCard";
 import SoldCard from "./cards/SoldCard";
 const { ethereum } = window;
@@ -32,8 +26,8 @@ export default function CreatorDashboard() {
   useEffect(async () => {
     await isMetaMaskConnected().then((connected) => {
       if (connected) {
-        loadNFTs();
         setConnection("true");
+        loadNFTs();
       }
     });
   }, []);
@@ -50,37 +44,7 @@ export default function CreatorDashboard() {
   }
 
   async function loadNFTs() {
-    const web3Modal = new Web3Modal();
-    const connection = await web3Modal.connect();
-    const provider = new ethers.providers.Web3Provider(connection);
-    const signer = provider.getSigner();
-
-    const marketContract = new ethers.Contract(
-      nftmarketaddress,
-      Market.abi,
-      signer
-    );
-    const tokenContract = new ethers.Contract(nftaddress, NFT.abi, provider);
-    const data = await marketContract.fetchItemsCreated();
-
-    const items = await Promise.all(
-      data.map(async (i) => {
-        const tokenUri = await tokenContract.tokenURI(i.tokenId);
-        const meta = await axios.get(tokenUri);
-        let price = ethers.utils.formatUnits(i.price.toString(), "ether");
-        let item = {
-          price,
-          name: meta.data.name,
-          tokenId: i.tokenId.toNumber(),
-          seller: i.seller,
-          owner: i.owner,
-          sold: i.sold,
-          image: meta.data.image,
-          category: meta.data.category,
-        };
-        return item;
-      })
-    );
+    const items = await getCreatedItems();
     const soldImages = items.filter((i) => i.sold && i.category === "image");
     const soldMusic = items.filter((i) => i.sold && i.category === "music");
     const imageItems = items.filter((i) => i.category === "image");
@@ -97,7 +61,7 @@ export default function CreatorDashboard() {
   if (isConnected === "false") {
     return (
       <div
-        className="bg-gray-700 relative text-gray-600 center cursor-pointer  mt-20 "
+        className="bg-purple-700 relative text-gray-600 center cursor-pointer  mt-20 "
         onClick={handleClick}
         style={{
           width: "450px",

@@ -7,50 +7,71 @@ function OwnedCard(props) {
         <h2 className="text-2xl py-2">Items Created</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-4">
           {props.imgData.map((nft, i) => (
-            <div key={i} className="border shadow  overflow-hidden">
+            <div key={i} className=" shadow-xl overflow-hidden">
               <img
                 alt=""
-                style={{ height: "200px", width: "100%" }}
+                style={{ height: "300px", width: "400px" }}
                 src={nft.image}
+                className="rounded-xl"
               />
-              <div className="p-4 bg-gray-100">
-                <p className="text-xl font-bold text-gray-900">{nft.name}</p>
+              <div className="p-4 pb-0 pl-6 bg-white float-left	">
+                <p className="text-xl text-gray-600 font-semibold">
+                  {nft.name}
+                </p>
               </div>
-              <div className="p-4 bg-gray-900">
-                <p className="text-2xl font-bold text-white">
-                  Price - {nft.price} Eth
+
+              <div className="p-5 pb-0 bg-white float-right	">
+                <p className=" font-bold text-gray-600">{nft.price} ETH</p>
+              </div>
+
+              <div className="clear-both px-5  py-2">
+                <p className="text-gray-400">{nft.description}</p>
+              </div>
+
+              <div className="p-4 pt-0 pl-6 bg-white border-t-1 text-semibold float-left	">
+                <p className=" text-gray-600 text-sm ">
+                  Token Id: {nft.tokenId}
                 </p>
               </div>
             </div>
           ))}
 
           {props.musicData.map((nft, i) => (
-            <div key={i} className="border shadow overflow-hidden">
+            <div key={i} className=" shadow-xl overflow-hidden">
               <div>
                 <img
                   alt=""
-                  style={{ height: "146px", width: "100%" }}
+                  className="rounded-xl"
+                  style={{ height: "233px", width: "400px" }}
                   src="/music.jpg"
                 />
               </div>
-              <audio
-                className="bg-gray-100 w-full"
-                autoPlay={false}
-                controls={true}
-              >
-                <source type="audio/mp3" src={nft.image} />
-              </audio>
-              <div
-                className="p-4 bg-gray-100"
-                style={{
-                  borderTop: "2px solid #D3D3D3",
-                }}
-              >
-                <p className="text-xl font-bold text-gray-900">{nft.name}</p>
+              <div>
+                <audio
+                  className="bg-gray-100 w-full"
+                  autoPlay={false}
+                  controls={true}
+                >
+                  <source type="audio/mp3" src={nft.image} />
+                </audio>
               </div>
-              <div className="p-4 bg-gray-900">
-                <p className="text-2xl font-bold text-white">
-                  Price - {nft.price} Eth
+              <div className="p-4 pb-0 pl-6 bg-white float-left	">
+                <p className="text-xl text-gray-600 font-semibold">
+                  {nft.name}
+                </p>
+              </div>
+
+              <div className="p-5 pb-0 bg-white float-right	">
+                <p className=" font-bold text-gray-600">{nft.price} ETH</p>
+              </div>
+
+              <div className="clear-both px-5  py-2">
+                <p className="text-gray-400">{nft.description}</p>
+              </div>
+
+              <div className="p-4 pt-0 pl-6 bg-white border-t-1 text-semibold float-left	">
+                <p className=" text-gray-600 text-sm ">
+                  Token Id: {nft.tokenId}
                 </p>
               </div>
             </div>

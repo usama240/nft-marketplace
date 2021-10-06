@@ -10,7 +10,7 @@ function Navbar() {
 
   return (
     <nav>
-      <div className="flex  pt-6 pb-6 pl-5 bg-gray-700	">
+      <div className="flex pt-6 pb-6 pl-5 bg-purple-700	">
         <p className="text-3xl font-bold text-white mr-12">Metaverse</p>
         <Link to="/" className="mr-10 pt-2 text-white">
           Home
@@ -56,7 +56,7 @@ function Navbar() {
 
           {showOptions && (
             <div
-              className="origin-top-right absolute right-0 mt-2 w-56 shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
+              className="origin-top-right absolute right-0 z-10 mt-2 w-56 shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
               role="menu"
               aria-orientation="vertical"
               aria-labelledby="menu-button"
@@ -65,7 +65,7 @@ function Navbar() {
               <div className="py-1" role="none">
                 <Link
                   href="#"
-                  className="text-gray-700 block px-4 py-2 text-sm hover:bg-gray-100"
+                  className="text-gray-700 block px-4 py-2 text-sm hover:bg-purple-100"
                   role="menuitem"
                   tabindex="-1"
                   id="menu-item-0"
@@ -76,7 +76,7 @@ function Navbar() {
                 </Link>
                 <Link
                   href="#"
-                  className="text-gray-700 block px-4 py-2 text-sm hover:bg-gray-100"
+                  className="text-gray-700 block px-4 py-2 text-sm hover:bg-purple-100"
                   role="menuitem"
                   tabindex="-1"
                   id="menu-item-1"

@@ -15,16 +15,14 @@ async function main() {
   let config = `
   export const nftmarketaddress = "${nftMarket.address}"
   export const nftaddress = "${nft.address}"
-  `
+  `;
 
-  let data = JSON.stringify(config)
-  fs.writeFileSync('./src/config.js', JSON.parse(data))
-
+  fs.writeFileSync("./src/config.js", config);
 }
 
 main()
   .then(() => process.exit(0))
-  .catch(error => {
+  .catch((error) => {
     console.error(error);
     process.exit(1);
   });

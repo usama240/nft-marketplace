@@ -100,7 +100,7 @@ export default function CreateAssets() {
 
   return (
     <div className="flex justify-center">
-      <div className="w-1/2 flex flex-col pb-12 mt-3">
+      <div className="w-1/3 flex flex-col py-12 px-8 mt-10 rounded-xl mt-3 bg-purple-400 ">
         <>
           {Boolean(error.length) && (
             <div
@@ -124,17 +124,16 @@ export default function CreateAssets() {
             </div>
           )}
         </>
-
         <input
           placeholder="Asset Name"
-          className="mt-8 border  p-4 bg-gray-200 focus:bg-white "
+          className="mt-8 border  p-4 bg-white rounded focus:bg-white "
           onChange={(e) =>
             updateFormInput({ ...formInput, name: e.target.value })
           }
         />
         <textarea
           placeholder="Asset Description"
-          className="mt-2 border  p-4 bg-gray-200 focus:bg-white "
+          className="mt-2 border  p-4  bg-white rounded focus:bg-white "
           onChange={(e) =>
             updateFormInput({ ...formInput, description: e.target.value })
           }
@@ -143,29 +142,32 @@ export default function CreateAssets() {
           type="number"
           min="0"
           placeholder="Asset Price in Eth"
-          className="mt-2 border  p-4 bg-gray-200 focus:bg-white "
+          className="mt-2 border  p-4 bg-white rounded focus:bg-white "
           onChange={(e) =>
             updateFormInput({ ...formInput, price: e.target.value })
           }
         />
-
         <select
           name="category"
-          className="py-2 mt-2 bg-gray-200"
+          className="py-2 mt-2 bg-white rounded"
           onChange={onCategoryChange}
         >
           <option value="">Category</option>
           <option value="image">Image</option>
           <option value="music">Music</option>
         </select>
-
-        <input type="file" name="Asset" className="my-4 " onChange={onChange} />
+        <input
+          type="file"
+          name="Asset"
+          className="my-4  rounded"
+          onChange={onChange}
+        />
         {fileUrl && (
           <img className=" mt-4" width="350" alt="Uploaded" src={fileUrl} />
         )}
         <button
           onClick={createMarket}
-          className="font-bold mt-4 bg-gray-800 text-white p-4 shadow-lg"
+          className="font-bold mt-4 mx-20 rounded bg-purple-800 text-white p-4 shadow-lg"
         >
           Create Digital Asset
         </button>

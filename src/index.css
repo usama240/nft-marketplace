@@ -1,3 +1,23 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.body {
+  background: #f8f8f8;
+}
+
+.hero img {
+  height: 75vh;
+  filter: brightness(50%);
+}
+
+.heading-container {
+  top: 270px;
+}
+.heading-second {
+  top: 300px;
+}
+.search {
+  top: 380px;
+  left: 600px;
+}

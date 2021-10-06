@@ -7,7 +7,7 @@ import { nftaddress, nftmarketaddress } from "../config";
 import NFT from "../artifacts/contracts/NFT.sol/NFT.json";
 import Market from "../artifacts/contracts/NFTMarket.sol/NFTMarket.json";
 
-export async function getItems() {
+export async function getAllItems() {
   const provider = new ethers.providers.JsonRpcProvider(
     "https://ropsten.infura.io/v3/df94e10d4d5f445b8ab45fd023ae25f8"
   );
@@ -18,7 +18,44 @@ export async function getItems() {
     provider
   );
   const data = await marketContract.fetchMarketItems();
-  const items = await Promise.all(
+  const items = iterateObject(data, tokenContract);
+  return items;
+}
+
+export async function getMyItems() {
+  const web3Modal = new Web3Modal();
+  const connection = await web3Modal.connect();
+  const provider = new ethers.providers.Web3Provider(connection);
+  const signer = provider.getSigner();
+  const marketContract = new ethers.Contract(
+    nftmarketaddress,
+    Market.abi,
+    signer
+  );
+  const tokenContract = new ethers.Contract(nftaddress, NFT.abi, provider);
+  const data = await marketContract.fetchMyNFTs();
+  const items = iterateObject(data, tokenContract);
+  return items;
+}
+
+export async function getCreatedItems() {
+  const web3Modal = new Web3Modal();
+  const connection = await web3Modal.connect();
+  const provider = new ethers.providers.Web3Provider(connection);
+  const signer = provider.getSigner();
+  const marketContract = new ethers.Contract(
+    nftmarketaddress,
+    Market.abi,
+    signer
+  );
+  const tokenContract = new ethers.Contract(nftaddress, NFT.abi, provider);
+  const data = await marketContract.fetchItemsCreated();
+  const items = iterateObject(data, tokenContract);
+  return items;
+}
+
+async function iterateObject(data, tokenContract) {
+  return await Promise.all(
     data.map(async (i) => {
       const tokenUri = await tokenContract.tokenURI(i.tokenId);
       const meta = await axios.get(tokenUri);
@@ -37,7 +74,6 @@ export async function getItems() {
       return item;
     })
   );
-  return items;
 }
 
 export async function buy(nft) {
@@ -45,6 +81,7 @@ export async function buy(nft) {
   const connection = await web3Modal.connect();
   const provider = new ethers.providers.Web3Provider(connection);
   const signer = provider.getSigner();
+
   const contract = new ethers.Contract(nftmarketaddress, Market.abi, signer);
   const price = ethers.utils.parseUnits(nft.price.toString(), "ether");
   const transaction = await contract.createMarketSale(nftaddress, nft.tokenId, {

@@ -6,73 +6,80 @@ function MyAssetCard(props) {
       <div className="m-40 mt-20">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-4">
           {props.imgData.map((nft, i) => (
-            <div key={i} className="border shadow-xl  overflow-hidden">
+            <div key={i} className=" shadow-xl overflow-hidden">
               <img
                 alt=""
-                style={{ height: "200px", width: "100%" }}
+                style={{ height: "300px", width: "400px" }}
                 src={nft.image}
+                className="rounded-xl"
               />
-              <div className="p-4 bg-gray-100">
-                <p
-                  style={{ height: "50px" }}
-                  className="text-2xl font-semibold"
-                >
+              <div className="p-4 pb-0 pl-6 bg-white float-left	">
+                <p className="text-xl text-gray-600 font-semibold">
                   {nft.name}
                 </p>
-                <div style={{ height: "50px", overflow: "hidden" }}>
-                  <p className="text-gray-400">{nft.description}</p>
-                </div>
-                <div style={{ overflow: "hidden" }}>
-                  <p
-                    className="pt-2 pb-2 text-gray-600"
-                    style={{
-                      borderTop: "1px solid #D3D3D3",
-                      borderBottom: "1px solid #D3D3D3",
-                    }}
-                  >
-                    <span className="mr-3">Minted By: </span>
-                    {nft.mintedBy.substr(0, 5) +
-                      "...." +
-                      nft.mintedBy.substr(38, 42)}
-                  </p>
-                </div>
               </div>
-
-              <div className="p-4 pt-0 bg-gray-100">
-                <p className="text-2xl mb-4 font-bold text-black">
-                  {nft.price} ETH
+              <div className="p-5 pb-0 bg-white float-right	">
+                <p className=" font-bold text-gray-600">{nft.price} ETH</p>
+              </div>
+              <div className="clear-both px-5  py-2">
+                <p className="text-gray-400">{nft.description}</p>
+              </div>
+              <div className="p-4 pt-0 pl-6 bg-white border-t-1 text-semibold float-left	">
+                <p className=" text-gray-600 text-sm ">
+                  Token Id: {nft.tokenId}
+                </p>
+                <p className=" text-gray-500 text-semibold text-sm ">
+                  Minted By:{" "}
+                  {nft.mintedBy.substr(0, 5) +
+                    "...." +
+                    nft.mintedBy.substr(38, 42)}
                 </p>
               </div>
             </div>
           ))}
 
           {props.musicData.map((nft, i) => (
-            <div key={i} className="border shadow overflow-hidden">
+            <div key={i} className=" shadow-xl overflow-hidden">
               <div>
                 <img
                   alt=""
-                  style={{ height: "146px", width: "100%" }}
+                  className="rounded-xl"
+                  style={{ height: "233px", width: "400px" }}
                   src="/music.jpg"
                 />
               </div>
-              <audio
-                className="bg-gray-100 w-full"
-                autoPlay={false}
-                controls={true}
-              >
-                <source type="audio/mp3" src={nft.image} />
-              </audio>
-              <div
-                className="p-4 bg-gray-100"
-                style={{
-                  borderTop: "2px solid #D3D3D3",
-                }}
-              >
-                <p className="text-xl font-bold text-gray-900">{nft.name}</p>
+              <div>
+                <audio
+                  className="bg-gray-100 w-full"
+                  autoPlay={false}
+                  controls={true}
+                >
+                  <source type="audio/mp3" src={nft.image} />
+                </audio>
               </div>
-              <div className="p-4 bg-gray-900">
-                <p className="text-2xl font-bold text-white">
-                  Price - {nft.price} Eth
+              <div className="p-4 pb-0 pl-6 bg-white float-left	">
+                <p className="text-xl text-gray-600 font-semibold">
+                  {nft.name}
+                </p>
+              </div>
+
+              <div className="p-5 pb-0 bg-white float-right	">
+                <p className=" font-bold text-gray-600">{nft.price} ETH</p>
+              </div>
+
+              <div className="clear-both px-5  py-2">
+                <p className="text-gray-400">{nft.description}</p>
+              </div>
+
+              <div className="p-4 pt-0 pl-6 bg-white border-t-1 text-semibold float-left	">
+                <p className=" text-gray-600 text-sm ">
+                  Token Id: {nft.tokenId}
+                </p>
+                <p className=" text-gray-500 text-semibold text-sm ">
+                  Minted By:{" "}
+                  {nft.mintedBy.substr(0, 5) +
+                    "...." +
+                    nft.mintedBy.substr(38, 42)}
                 </p>
               </div>
             </div>
